@@ -4,7 +4,8 @@ using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
 using Unity.MLAgentsExamples;
 using Unity.MLAgents.Sensors;
-using BodyPart = Unity.MLAgentsExamples.BodyPart;
+using BodyPart = Unity.Assets.Scenes.walker.BodyPart;
+using JointDriveController = Unity.Assets.Scenes.walker.MyJointDriveController;
 using Random = UnityEngine.Random;
 
 public class Walker : Agent
@@ -50,19 +51,19 @@ public class Walker : Agent
 
         //Setup each body part
         m_JdController = GetComponent<JointDriveController>();
-        m_JdController.SetupBodyPart(hips);
-        m_JdController.SetupBodyPart(leftUpperLeg);
-        m_JdController.SetupBodyPart(spine);
-        m_JdController.SetupBodyPart(head);
-        m_JdController.SetupBodyPart(leftLowerLeg);
-        m_JdController.SetupBodyPart(leftFoot);
-        m_JdController.SetupBodyPart(rightUpperLeg);
-        m_JdController.SetupBodyPart(rightLowerLeg);
-        m_JdController.SetupBodyPart(rightFoot);
-        m_JdController.SetupBodyPart(leftUpperArm);
-        m_JdController.SetupBodyPart(leftLowerArm);
-        m_JdController.SetupBodyPart(rightUpperArm);
-        m_JdController.SetupBodyPart(rightLowerArm);
+        m_JdController.SetupBodyPart(hips,true);
+        m_JdController.SetupBodyPart(leftUpperLeg,true);
+        m_JdController.SetupBodyPart(spine,true);
+        m_JdController.SetupBodyPart(head,true);
+        m_JdController.SetupBodyPart(leftLowerLeg,true);
+        m_JdController.SetupBodyPart(leftFoot,false);
+        m_JdController.SetupBodyPart(rightUpperLeg,true);
+        m_JdController.SetupBodyPart(rightLowerLeg,true);
+        m_JdController.SetupBodyPart(rightFoot,false);
+        m_JdController.SetupBodyPart(leftUpperArm,true);
+        m_JdController.SetupBodyPart(leftLowerArm,true);
+        m_JdController.SetupBodyPart(rightUpperArm,true);
+        m_JdController.SetupBodyPart(rightLowerArm,true);
 
         m_ResetParams = Academy.Instance.EnvironmentParameters;
     }
@@ -196,15 +197,67 @@ public class Walker : Agent
         return avgVel;
     }
 
-    public 
-    void Start()
+    void UpdateOrientationObjects()
     {
-        
+        // m_WorldDirToWalk = target.position - hips.position;
+        // m_OrientationCube.UpdateOrientation(hips, target);
+        // if (m_DirectionIndicator)
+        // {
+        //     m_DirectionIndicator.MatchOrientation(m_OrientationCube.transform);
+        // }
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
+        UpdateOrientationObjects();
+        Transform _hips=hips;
+        Debug.Log(hips.position.y+" "+head.position.y);
+        var hipReward = hips.position.y+0.5f;
+        var headReward = head.position.y+0.4f;
+        AddReward(hipReward+headReward);
+        // if(_hips.position.y>.7f){
+        //     AddReward(0.01f);
+        // }
+        // if(head.position.y>1.2f){
+        //     AddReward(0.04f);
+        // }
+
+        var cubeForward = m_OrientationCube.transform.forward;
+
+        // Set reward for this step according to mixture of the following elements.
+        // a. Match target speed
+        //This reward will approach 1 if it matches perfectly and approach zero as it deviates
+        // var matchSpeedReward = GetMatchingVelocityReward(cubeForward * MTargetWalkingSpeed, GetAvgVelocity());
+
+        //Check for NaNs
+        // if (float.IsNaN(matchSpeedReward))
+        // {
+        //     throw new ArgumentException(
+        //         "NaN in moveTowardsTargetReward.\n" +
+        //         $" cubeForward: {cubeForward}\n" +
+        //         $" hips.velocity: {m_JdController.bodyPartsDict[hips].rb.velocity}\n" +
+        //         $" maximumWalkingSpeed: {m_maxWalkingSpeed}"
+        //     );
+        // }
+
+        // b. Rotation alignment with target direction.
+        //This reward will approach 1 if it faces the target direction perfectly and approach zero as it deviates
+        // var headForward = head.forward;
+        // headForward.y = 0;
+        // var lookAtTargetReward = (Vector3.Dot(cubeForward, head.forward) + 1) * .5F;
+        // var lookAtTargetReward = (Vector3.Dot(cubeForward, headForward) + 1) * .5F;
+
+        //Check for NaNs
+        // if (float.IsNaN(lookAtTargetReward))
+        // {
+        //     throw new ArgumentException(
+        //         "NaN in lookAtTargetReward.\n" +
+        //         $" cubeForward: {cubeForward}\n" +
+        //         $" head.forward: {head.forward}"
+        //     );
+        // }
+
+        // AddReward(matchSpeedReward * lookAtTargetReward);
         
     }
 }

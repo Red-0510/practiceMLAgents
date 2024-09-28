@@ -110,7 +110,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8605751167603790523, guid: 13f64fcae66214b428a07cdb9e63c7f6, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8396990086405248612, guid: 13f64fcae66214b428a07cdb9e63c7f6, type: 3}
@@ -136,13 +136,13 @@ PrefabInstance:
       addedObject: {fileID: 7696337801754569106}
     - targetCorrespondingSourceObject: {fileID: 4096330740159479325, guid: 13f64fcae66214b428a07cdb9e63c7f6, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5781587144563381261}
-    - targetCorrespondingSourceObject: {fileID: 4096330740159479325, guid: 13f64fcae66214b428a07cdb9e63c7f6, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 4254989217843534701}
     - targetCorrespondingSourceObject: {fileID: 4096330740159479325, guid: 13f64fcae66214b428a07cdb9e63c7f6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 754996898576965425}
+    - targetCorrespondingSourceObject: {fileID: 4096330740159479325, guid: 13f64fcae66214b428a07cdb9e63c7f6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7361976721351257602}
     - targetCorrespondingSourceObject: {fileID: 4513048955741975517, guid: 13f64fcae66214b428a07cdb9e63c7f6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5386480697959065063}
@@ -715,22 +715,6 @@ MonoBehaviour:
   rightUpperArm: {fileID: 5018756161553692098}
   leftLowerArm: {fileID: 6409573360095336892}
   rightLowerArm: {fileID: 6931465411846926310}
---- !u!114 &5781587144563381261
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3264236366873533995}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b29724baddfa457da6eeab446fa49ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxJointSpring: 40000
-  jointDampen: 5000
-  maxJointForceLimit: 20000
-  bodyPartsList: []
 --- !u!114 &4254989217843534701
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -776,6 +760,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DecisionPeriod: 5
   TakeActionsBetweenDecisions: 1
+--- !u!114 &7361976721351257602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3264236366873533995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9b976a4eb5322f499f7ed08487dc10f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxJointSpring: 4000
+  jointDampen: 500
+  maxJointForceLimit: 2000
+  bodyPartsList: []
 --- !u!1 &3291746614726224789 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4051921004489247651, guid: 13f64fcae66214b428a07cdb9e63c7f6, type: 3}
