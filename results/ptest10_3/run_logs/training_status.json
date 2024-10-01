@@ -1,0 +1,20 @@
+{
+    "mywalker": {
+        "checkpoints": [
+            {
+                "steps": 499999,
+                "file_path": "results\\ptest10_3\\mywalker\\mywalker-499999.onnx",
+                "reward": -8.817668516119731,
+                "creation_time": 1727730120.1577609,
+                "auxillary_file_paths": [
+                    "results\\ptest10_3\\mywalker\\mywalker-499999.pt"
+                ]
+            }
+        ]
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "1.0.0",
+        "torch_version": "2.2.2+cu121"
+    }
+}

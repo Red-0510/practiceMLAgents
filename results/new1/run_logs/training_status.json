@@ -1,0 +1,29 @@
+{
+    "mywalker": {
+        "checkpoints": [
+            {
+                "steps": 68576,
+                "file_path": "results\\new1\\mywalker\\mywalker-68576.onnx",
+                "reward": null,
+                "creation_time": 1727639061.3867111,
+                "auxillary_file_paths": [
+                    "results\\new1\\mywalker\\mywalker-68576.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 68576,
+            "file_path": "results\\new1\\mywalker.onnx",
+            "reward": null,
+            "creation_time": 1727639061.3867111,
+            "auxillary_file_paths": [
+                "results\\new1\\mywalker\\mywalker-68576.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "1.0.0",
+        "torch_version": "2.2.2+cu121"
+    }
+}

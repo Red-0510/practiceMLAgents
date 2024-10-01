@@ -15,7 +15,7 @@ namespace Unity.Assets.Scenes.walker
 
         [Header("Ground Check")] public bool agentDoneOnGroundContact; // Whether to reset agent on ground contact.
         public bool penalizeGroundContact=true; // Whether to penalize on contact.
-        public float groundContactPenalty=-1f; // Penalty amount (ex: -1).
+        public float groundContactPenalty; // Penalty amount (ex: -1).
         public bool touchingGround;
         const string k_Ground = "ground"; // Tag of ground object.
 
@@ -24,8 +24,9 @@ namespace Unity.Assets.Scenes.walker
         /// </summary>
         void OnCollisionEnter(Collision col)
         {
-            Debug.Log("here");
-            Debug.Log(agent);
+            // Debug.Log("here");
+            // Debug.Log(agent);
+            // Debug.Log("here"+penalizeGroundContact);
             if (col.transform.CompareTag(k_Ground))
             {
                 touchingGround = true;
@@ -34,8 +35,9 @@ namespace Unity.Assets.Scenes.walker
                     agent.AddReward(groundContactPenalty);
                 }
 
-                if (agentDoneOnGroundContact)
+                if (penalizeGroundContact && agentDoneOnGroundContact)
                 {
+                    // Debug.Log("kill");
                     agent.EndEpisode();
                 }
             }

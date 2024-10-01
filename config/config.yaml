@@ -31,10 +31,10 @@ behaviors:
       #   use_actions: false
       #   use_vail: false
       #   demo_path: Project/Assets/ML-Agents/Examples/PushBlock/Demos/ExpertPushBlock.demo
-    keep_checkpoints: 5
-    max_steps: 100000
+    keep_checkpoints: 20
+    max_steps: 10000000
     time_horizon: 64
-    summary_freq: 60000
+    summary_freq: 10000
     # behavioral_cloning:
     #   demo_path: Project/Assets/ML-Agents/Examples/PushBlock/Demos/ExpertPushBlock.demo
     #   steps: 50000

@@ -207,58 +207,154 @@ public class Walker : Agent
         // }
     }
 
-    void FixedUpdate()
-    {
-        UpdateOrientationObjects();
-        Transform _hips=hips;
-        Debug.Log(hips.position.y+" "+head.position.y);
-        var hipReward = hips.position.y+0.5f;
-        var headReward = head.position.y+0.4f;
-        AddReward(hipReward+headReward);
-        // if(_hips.position.y>.7f){
-        //     AddReward(0.01f);
-        // }
-        // if(head.position.y>1.2f){
-        //     AddReward(0.04f);
-        // }
+//     void FixedUpdate()
+//     {
+//         UpdateOrientationObjects();
+//         Transform _hips=hips;
+//         Debug.Log(hips.position.y+" "+head.position.y);
+//         var hipReward = hips.position.y+0.5f;
+//         var headReward = head.position.y+0.4f;
+//         AddReward(hipReward+headReward);
+//         // if(_hips.position.y>.7f){
+//         //     AddReward(0.01f);
+//         // }
+//         // if(head.position.y>1.2f){
+//         //     AddReward(0.04f);
+//         // }
 
-        var cubeForward = m_OrientationCube.transform.forward;
+//         var cubeForward = m_OrientationCube.transform.forward;
 
-        // Set reward for this step according to mixture of the following elements.
-        // a. Match target speed
-        //This reward will approach 1 if it matches perfectly and approach zero as it deviates
-        // var matchSpeedReward = GetMatchingVelocityReward(cubeForward * MTargetWalkingSpeed, GetAvgVelocity());
+//         // Set reward for this step according to mixture of the following elements.
+//         // a. Match target speed
+//         //This reward will approach 1 if it matches perfectly and approach zero as it deviates
+//         // var matchSpeedReward = GetMatchingVelocityReward(cubeForward * MTargetWalkingSpeed, GetAvgVelocity());
 
-        //Check for NaNs
-        // if (float.IsNaN(matchSpeedReward))
-        // {
-        //     throw new ArgumentException(
-        //         "NaN in moveTowardsTargetReward.\n" +
-        //         $" cubeForward: {cubeForward}\n" +
-        //         $" hips.velocity: {m_JdController.bodyPartsDict[hips].rb.velocity}\n" +
-        //         $" maximumWalkingSpeed: {m_maxWalkingSpeed}"
-        //     );
-        // }
+//         //Check for NaNs
+//         // if (float.IsNaN(matchSpeedReward))
+//         // {
+//         //     throw new ArgumentException(
+//         //         "NaN in moveTowardsTargetReward.\n" +
+//         //         $" cubeForward: {cubeForward}\n" +
+//         //         $" hips.velocity: {m_JdController.bodyPartsDict[hips].rb.velocity}\n" +
+//         //         $" maximumWalkingSpeed: {m_maxWalkingSpeed}"
+//         //     );
+//         // }
 
-        // b. Rotation alignment with target direction.
-        //This reward will approach 1 if it faces the target direction perfectly and approach zero as it deviates
-        // var headForward = head.forward;
-        // headForward.y = 0;
-        // var lookAtTargetReward = (Vector3.Dot(cubeForward, head.forward) + 1) * .5F;
-        // var lookAtTargetReward = (Vector3.Dot(cubeForward, headForward) + 1) * .5F;
+//         // b. Rotation alignment with target direction.
+//         //This reward will approach 1 if it faces the target direction perfectly and approach zero as it deviates
+//         // var headForward = head.forward;
+//         // headForward.y = 0;
+//         // var lookAtTargetReward = (Vector3.Dot(cubeForward, head.forward) + 1) * .5F;
+//         // var lookAtTargetReward = (Vector3.Dot(cubeForward, headForward) + 1) * .5F;
 
-        //Check for NaNs
-        // if (float.IsNaN(lookAtTargetReward))
-        // {
-        //     throw new ArgumentException(
-        //         "NaN in lookAtTargetReward.\n" +
-        //         $" cubeForward: {cubeForward}\n" +
-        //         $" head.forward: {head.forward}"
-        //     );
-        // }
+//         //Check for NaNs
+//         // if (float.IsNaN(lookAtTargetReward))
+//         // {
+//         //     throw new ArgumentException(
+//         //         "NaN in lookAtTargetReward.\n" +
+//         //         $" cubeForward: {cubeForward}\n" +
+//         //         $" head.forward: {head.forward}"
+//         //     );
+//         // }
 
-        // AddReward(matchSpeedReward * lookAtTargetReward);
+//         // AddReward(matchSpeedReward * lookAtTargetReward);
         
+//     }
+// }
+
+void FixedUpdate()
+{
+    UpdateOrientationObjects();
+    
+    // Get relevant body part references
+    Transform _hips = hips;
+    Transform _head = head;
+    Transform _spine = spine;
+    Transform _leftFoot = leftFoot;
+    Transform _rightFoot = rightFoot;
+
+    // Calculate rewards for standing up straight
+    float hipHeight = _hips.position.y;
+    float headHeight = _head.position.y;
+
+    // Reward for keeping the hips and head above a certain height
+    if (hipHeight > 0.5f)
+    {
+        AddReward(1.2f * (hipHeight - 0.5f)); // Increased reward for hip height
+    }
+
+    if (headHeight > 1.0f)
+    {
+        AddReward(2.2f * (headHeight - 1.0f)); // Increased reward for head height
+    }
+
+    // Reward for head being above a certain height
+    if (headHeight > 0.7f)
+    {
+        AddReward(2.5f); // Good reward if the head height is above 0.7 units
+    }
+
+    // Penalty for head or spine touching the ground
+    if (_head.position.y < 0.3f || _spine.position.y < 0.3f)
+    {
+        AddReward(-5.0f); // High penalty for head or spine touching the ground
+    }
+
+    // Reward for forward movement
+    Vector3 cubeForward = m_OrientationCube.transform.forward;
+    Vector3 avgVelocity = GetAvgVelocity();
+    float forwardVelReward = Vector3.Dot(cubeForward, avgVelocity);
+
+    if (forwardVelReward > 0.01f)
+    {
+        AddReward(5.2f * forwardVelReward); // Increased reward for moving in the desired direction
+    }
+
+    // Reward for walking more distance
+    float distanceTraveled = Vector3.Distance(_hips.position, m_OrientationCube.transform.position);
+    AddReward(0.2f * distanceTraveled); // Increased reward for covering more distance effectively
+
+    // Penalize staying in the same position (lack of movement)
+    if (avgVelocity.magnitude < 0.01f)
+    {
+        AddReward(-4.0f); // Huge penalty if the agent stays in the same place
+    }
+
+    // Reward for maintaining body alignment (balance)
+    float alignmentReward = Quaternion.Dot(Quaternion.LookRotation(cubeForward), Quaternion.LookRotation(_head.forward));
+    AddReward(0.02f * alignmentReward); // Reward for aligning the head with the target direction
+
+    // Penalize large deviations in body posture
+    foreach (var bodyPart in m_JdController.bodyPartsList)
+    {
+        float angleToUpright = Quaternion.Angle(bodyPart.rb.rotation, Quaternion.identity);
+        AddReward(-0.001f * angleToUpright); // Small penalty for deviating from upright position
+    }
+
+    // Reward for placing feet forward
+    Vector3 forwardDirection = cubeForward.normalized;
+
+    // Check left foot movement
+    float leftFootForwardMovement = Vector3.Dot(forwardDirection, (_leftFoot.position - _hips.position).normalized);
+    if (leftFootForwardMovement > 0.1f) // If left foot moves forward significantly
+    {
+        AddReward(5.0f); // Huge reward for moving the left foot forward
+    }
+
+    // Check right foot movement
+    float rightFootForwardMovement = Vector3.Dot(forwardDirection, (_rightFoot.position - _hips.position).normalized);
+    if (rightFootForwardMovement > 0.1f) // If right foot moves forward significantly
+    {
+        AddReward(5.0f); // Huge reward for moving the right foot forward
     }
 }
+
+
+
+
+
+
+
+}
+
 

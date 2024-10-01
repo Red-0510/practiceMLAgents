@@ -140,7 +140,8 @@ namespace Unity.Assets.Scenes.walker
             {
                 bp.groundContact.agent = gameObject.GetComponent<Agent>();
             }
-            bp.groundContact.penalizeGroundContact = toAddGroundContact;
+            // bp.groundContact.penalizeGroundContact = toAddGroundContact;
+            // bp.groundContact.agentDoneOnGroundContact = toAddGroundContact;
 
             if (bp.joint)
             {
