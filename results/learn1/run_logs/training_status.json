@@ -1,0 +1,29 @@
+{
+    "Walker": {
+        "checkpoints": [
+            {
+                "steps": 118302,
+                "file_path": "results\\learn1\\Walker\\Walker-118302.onnx",
+                "reward": -0.6825039728406311,
+                "creation_time": 1727782473.2835555,
+                "auxillary_file_paths": [
+                    "results\\learn1\\Walker\\Walker-118302.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 118302,
+            "file_path": "results\\learn1\\Walker.onnx",
+            "reward": -0.6825039728406311,
+            "creation_time": 1727782473.2835555,
+            "auxillary_file_paths": [
+                "results\\learn1\\Walker\\Walker-118302.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "1.0.0",
+        "torch_version": "2.2.2+cu121"
+    }
+}

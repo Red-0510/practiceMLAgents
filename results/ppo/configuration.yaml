@@ -74,5 +74,5 @@ checkpoint_settings:
   inference: false
   results_dir: results
 torch_settings:
-  device: null
+  device: gpu
 debug: false

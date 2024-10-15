@@ -14,18 +14,18 @@ namespace Unity.Assets.Scenes.walker
         [HideInInspector] public Agent agent;
 
         [Header("Ground Check")] public bool agentDoneOnGroundContact; // Whether to reset agent on ground contact.
-        public bool penalizeGroundContact=true; // Whether to penalize on contact.
-        public float groundContactPenalty=-1f; // Penalty amount (ex: -1).
+        public bool penalizeGroundContact; // Whether to penalize on contact.
+        public float groundContactPenalty; // Penalty amount (ex: -1).
         public bool touchingGround;
         const string k_Ground = "ground"; // Tag of ground object.
 
         /// <summary>
         /// Check for collision with ground, and optionally penalize agent.
         /// </summary>
-        void OnCollisionEnter(Collision col)
+        void OnCollisionStay(Collision col)
         {
-            Debug.Log("here");
-            Debug.Log(agent);
+            // Debug.Log("here");
+            // Debug.Log(agent);
             if (col.transform.CompareTag(k_Ground))
             {
                 touchingGround = true;

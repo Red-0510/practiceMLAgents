@@ -1,0 +1,65 @@
+{
+    "StraightWalker": {
+        "checkpoints": [
+            {
+                "steps": 28499967,
+                "file_path": "results\\straight-walker-test2\\StraightWalker\\StraightWalker-28499967.onnx",
+                "reward": 17.40108859279074,
+                "creation_time": 1728671284.2494733,
+                "auxillary_file_paths": [
+                    "results\\straight-walker-test2\\StraightWalker\\StraightWalker-28499967.pt"
+                ]
+            },
+            {
+                "steps": 28999978,
+                "file_path": "results\\straight-walker-test2\\StraightWalker\\StraightWalker-28999978.onnx",
+                "reward": 17.651049564411114,
+                "creation_time": 1728672713.8151503,
+                "auxillary_file_paths": [
+                    "results\\straight-walker-test2\\StraightWalker\\StraightWalker-28999978.pt"
+                ]
+            },
+            {
+                "steps": 29499994,
+                "file_path": "results\\straight-walker-test2\\StraightWalker\\StraightWalker-29499994.onnx",
+                "reward": 16.978133785567096,
+                "creation_time": 1728674021.4266868,
+                "auxillary_file_paths": [
+                    "results\\straight-walker-test2\\StraightWalker\\StraightWalker-29499994.pt"
+                ]
+            },
+            {
+                "steps": 29999980,
+                "file_path": "results\\straight-walker-test2\\StraightWalker\\StraightWalker-29999980.onnx",
+                "reward": 16.69961232290218,
+                "creation_time": 1728675336.383241,
+                "auxillary_file_paths": [
+                    "results\\straight-walker-test2\\StraightWalker\\StraightWalker-29999980.pt"
+                ]
+            },
+            {
+                "steps": 30000032,
+                "file_path": "results\\straight-walker-test2\\StraightWalker\\StraightWalker-30000032.onnx",
+                "reward": 16.701579275703928,
+                "creation_time": 1728675336.4489539,
+                "auxillary_file_paths": [
+                    "results\\straight-walker-test2\\StraightWalker\\StraightWalker-30000032.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 30000032,
+            "file_path": "results\\straight-walker-test2\\StraightWalker.onnx",
+            "reward": 16.701579275703928,
+            "creation_time": 1728675336.4489539,
+            "auxillary_file_paths": [
+                "results\\straight-walker-test2\\StraightWalker\\StraightWalker-30000032.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "1.0.0",
+        "torch_version": "2.2.2+cu121"
+    }
+}
