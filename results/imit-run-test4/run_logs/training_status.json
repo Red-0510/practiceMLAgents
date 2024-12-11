@@ -1,0 +1,29 @@
+{
+    "ImitationRun": {
+        "checkpoints": [
+            {
+                "steps": 4012,
+                "file_path": "results\\imit-run-test4\\ImitationRun\\ImitationRun-4012.onnx",
+                "reward": 21.967024589043397,
+                "creation_time": 1731999692.1362302,
+                "auxillary_file_paths": [
+                    "results\\imit-run-test4\\ImitationRun\\ImitationRun-4012.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 4012,
+            "file_path": "results\\imit-run-test4\\ImitationRun.onnx",
+            "reward": 21.967024589043397,
+            "creation_time": 1731999692.1362302,
+            "auxillary_file_paths": [
+                "results\\imit-run-test4\\ImitationRun\\ImitationRun-4012.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "1.0.0",
+        "torch_version": "2.2.2+cu121"
+    }
+}

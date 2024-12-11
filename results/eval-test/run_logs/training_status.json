@@ -1,0 +1,29 @@
+{
+    "TerrainWalker": {
+        "checkpoints": [
+            {
+                "steps": 6880,
+                "file_path": "results\\eval-test\\TerrainWalker\\TerrainWalker-6880.onnx",
+                "reward": 2.407583976257125,
+                "creation_time": 1733822292.7810516,
+                "auxillary_file_paths": [
+                    "results\\eval-test\\TerrainWalker\\TerrainWalker-6880.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 6880,
+            "file_path": "results\\eval-test\\TerrainWalker.onnx",
+            "reward": 2.407583976257125,
+            "creation_time": 1733822292.7810516,
+            "auxillary_file_paths": [
+                "results\\eval-test\\TerrainWalker\\TerrainWalker-6880.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "1.0.0",
+        "torch_version": "2.2.2+cu121"
+    }
+}

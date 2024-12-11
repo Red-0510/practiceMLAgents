@@ -170,6 +170,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4723211230811750}
   - component: {fileID: 95210088044579240}
+  - component: {fileID: 6267979714233606343}
   m_Layer: 0
   m_Name: Animator
   m_TagString: Untagged
@@ -203,8 +204,8 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1079925343487550}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: fa0773caae34843268db7f12c1421ce5, type: 3}
-  m_Controller: {fileID: 9100000, guid: b1b909ee490e74bcdb043fcd491f0a8f, type: 2}
+  m_Avatar: {fileID: 9000000, guid: c92f2de2464524847b17cf076b18f122, type: 3}
+  m_Controller: {fileID: 9100000, guid: bd031fd43c2299140b8a219fba0642c8, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 1
   m_ApplyRootMotion: 1
@@ -215,6 +216,27 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &6267979714233606343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1079925343487550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8fa81f7e1de65c4f9514d1d87741e18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SensorIsInTouch: []
+  AnimationSteps: []
+  AnimationStepsReady: 0
+  IsLoopingAnimation: 0
+  NormalizedTime: 0
+  Lenght: 0
+  BodyParts: []
+  toePositionOffset: 0.3
+  toeRotationOffset: 0.7
 --- !u!1 &1097450810495386
 GameObject:
   m_ObjectHideFlags: 0
@@ -2476,8 +2498,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4307242655967092}
+  - component: {fileID: 7290776400551497146}
   m_Layer: 0
-  m_Name: MarathonMan
+  m_Name: RagdollWalker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2511,6 +2534,48 @@ Transform:
   - {fileID: 4812549026163900}
   m_Father: {fileID: 4723211230811750}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &7290776400551497146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1370737015692292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1de2b7ea01afb8547aa4083ef5250499, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MusclePowers:
+  - Muscle: butt
+    PowerVector: {x: 40, y: 0, z: 0}
+  - Muscle: lower_waist
+    PowerVector: {x: 40, y: 0, z: 40}
+  - Muscle: right_thigh
+    PowerVector: {x: 120, y: 40, z: 40}
+  - Muscle: right_shin
+    PowerVector: {x: 80, y: 0, z: 0}
+  - Muscle: right_right_foot
+    PowerVector: {x: 40, y: 20, z: 0}
+  - Muscle: left_thigh
+    PowerVector: {x: 120, y: 40, z: 40}
+  - Muscle: left_shin
+    PowerVector: {x: 80, y: 0, z: 0}
+  - Muscle: left_left_foot
+    PowerVector: {x: 40, y: 20, z: 0}
+  - Muscle: right_upper_arm
+    PowerVector: {x: 20, y: 20, z: 20}
+  - Muscle: right_shoulder2
+    PowerVector: {x: 20, y: 0, z: 0}
+  - Muscle: right_larm
+    PowerVector: {x: 40, y: 0, z: 0}
+  - Muscle: left_upper_arm
+    PowerVector: {x: 20, y: 20, z: 20}
+  - Muscle: left_shoulder2
+    PowerVector: {x: 20, y: 0, z: 0}
+  - Muscle: left_larm
+    PowerVector: {x: 40, y: 0, z: 0}
+  MotorScale: 1
 --- !u!1 &1413947776438620
 GameObject:
   m_ObjectHideFlags: 0

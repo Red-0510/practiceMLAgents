@@ -123,6 +123,7 @@ public class RagdollTerrainWalkerAgent : Agent, IOnTerrainCollision
                 pelvis.Rigidbody.transform.position, true);
         sensor.AddObservation(distances);
         sensor.AddObservation(fraction);
+		Debug.Log(fraction);
 		// _bodyManager.OnCollectObservationsHandleDebug(GetInfo());
 	}
 

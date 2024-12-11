@@ -1,0 +1,65 @@
+{
+    "TerrainWalker": {
+        "checkpoints": [
+            {
+                "steps": 28499941,
+                "file_path": "results/terrain-walker-lab-test5/TerrainWalker/TerrainWalker-28499941.onnx",
+                "reward": 219.2359708150228,
+                "creation_time": 1731965680.537285,
+                "auxillary_file_paths": [
+                    "results/terrain-walker-lab-test5/TerrainWalker/TerrainWalker-28499941.pt"
+                ]
+            },
+            {
+                "steps": 28999799,
+                "file_path": "results/terrain-walker-lab-test5/TerrainWalker/TerrainWalker-28999799.onnx",
+                "reward": 240.45741084584017,
+                "creation_time": 1731966200.4570606,
+                "auxillary_file_paths": [
+                    "results/terrain-walker-lab-test5/TerrainWalker/TerrainWalker-28999799.pt"
+                ]
+            },
+            {
+                "steps": 29499972,
+                "file_path": "results/terrain-walker-lab-test5/TerrainWalker/TerrainWalker-29499972.onnx",
+                "reward": 230.36040130615234,
+                "creation_time": 1731966724.3770945,
+                "auxillary_file_paths": [
+                    "results/terrain-walker-lab-test5/TerrainWalker/TerrainWalker-29499972.pt"
+                ]
+            },
+            {
+                "steps": 29999947,
+                "file_path": "results/terrain-walker-lab-test5/TerrainWalker/TerrainWalker-29999947.onnx",
+                "reward": 225.88471476236978,
+                "creation_time": 1731967251.1243625,
+                "auxillary_file_paths": [
+                    "results/terrain-walker-lab-test5/TerrainWalker/TerrainWalker-29999947.pt"
+                ]
+            },
+            {
+                "steps": 30000075,
+                "file_path": "results/terrain-walker-lab-test5/TerrainWalker/TerrainWalker-30000075.onnx",
+                "reward": 226.87061251126804,
+                "creation_time": 1731967251.178931,
+                "auxillary_file_paths": [
+                    "results/terrain-walker-lab-test5/TerrainWalker/TerrainWalker-30000075.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 30000075,
+            "file_path": "results/terrain-walker-lab-test5/TerrainWalker.onnx",
+            "reward": 226.87061251126804,
+            "creation_time": 1731967251.178931,
+            "auxillary_file_paths": [
+                "results/terrain-walker-lab-test5/TerrainWalker/TerrainWalker-30000075.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "1.0.0",
+        "torch_version": "2.5.1+cu124"
+    }
+}

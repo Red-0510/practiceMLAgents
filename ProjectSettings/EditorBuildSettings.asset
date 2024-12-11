@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/TerrainWalker/TerrainWalker.unity
-    guid: 71381dc1cf9fb4a41a48d063f00bd003
+    path: Assets/Scenes/Imitation/RagdollRunningAgent.unity
+    guid: 094b8ebda8d938647b5a9ac44a3b7873
   m_configObjects: {}
