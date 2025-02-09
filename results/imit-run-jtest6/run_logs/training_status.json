@@ -1,0 +1,65 @@
+{
+    "ImitationRun": {
+        "checkpoints": [
+            {
+                "steps": 17499986,
+                "file_path": "results\\imit-run-jtest6\\ImitationRun\\ImitationRun-17499986.onnx",
+                "reward": 257.39653654318107,
+                "creation_time": 1733807397.499854,
+                "auxillary_file_paths": [
+                    "results\\imit-run-jtest6\\ImitationRun\\ImitationRun-17499986.pt"
+                ]
+            },
+            {
+                "steps": 17999929,
+                "file_path": "results\\imit-run-jtest6\\ImitationRun\\ImitationRun-17999929.onnx",
+                "reward": 260.85395450962756,
+                "creation_time": 1733808376.9319777,
+                "auxillary_file_paths": [
+                    "results\\imit-run-jtest6\\ImitationRun\\ImitationRun-17999929.pt"
+                ]
+            },
+            {
+                "steps": 18499998,
+                "file_path": "results\\imit-run-jtest6\\ImitationRun\\ImitationRun-18499998.onnx",
+                "reward": 256.83061159236564,
+                "creation_time": 1733809366.7099543,
+                "auxillary_file_paths": [
+                    "results\\imit-run-jtest6\\ImitationRun\\ImitationRun-18499998.pt"
+                ]
+            },
+            {
+                "steps": 18999956,
+                "file_path": "results\\imit-run-jtest6\\ImitationRun\\ImitationRun-18999956.onnx",
+                "reward": 264.0367858886719,
+                "creation_time": 1733810353.2420511,
+                "auxillary_file_paths": [
+                    "results\\imit-run-jtest6\\ImitationRun\\ImitationRun-18999956.pt"
+                ]
+            },
+            {
+                "steps": 19125018,
+                "file_path": "results\\imit-run-jtest6\\ImitationRun\\ImitationRun-19125018.onnx",
+                "reward": 258.48353401121665,
+                "creation_time": 1733810595.5045593,
+                "auxillary_file_paths": [
+                    "results\\imit-run-jtest6\\ImitationRun\\ImitationRun-19125018.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 19125018,
+            "file_path": "results\\imit-run-jtest6\\ImitationRun.onnx",
+            "reward": 258.48353401121665,
+            "creation_time": 1733810595.5045593,
+            "auxillary_file_paths": [
+                "results\\imit-run-jtest6\\ImitationRun\\ImitationRun-19125018.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "1.0.0",
+        "torch_version": "2.2.2+cu121"
+    }
+}

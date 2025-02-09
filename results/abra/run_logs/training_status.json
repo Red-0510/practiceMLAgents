@@ -1,0 +1,29 @@
+{
+    "StraightWalker": {
+        "checkpoints": [
+            {
+                "steps": 19845,
+                "file_path": "results\\abra\\StraightWalker\\StraightWalker-19845.onnx",
+                "reward": -107.83885374058111,
+                "creation_time": 1728723419.8409083,
+                "auxillary_file_paths": [
+                    "results\\abra\\StraightWalker\\StraightWalker-19845.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 19845,
+            "file_path": "results\\abra\\StraightWalker.onnx",
+            "reward": -107.83885374058111,
+            "creation_time": 1728723419.8409083,
+            "auxillary_file_paths": [
+                "results\\abra\\StraightWalker\\StraightWalker-19845.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "1.0.0",
+        "torch_version": "2.2.2+cu121"
+    }
+}

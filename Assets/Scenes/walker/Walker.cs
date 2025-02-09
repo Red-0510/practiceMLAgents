@@ -6,7 +6,7 @@ using Unity.MLAgentsExamples;
 using Unity.MLAgents.Sensors;
 using BodyPart = Unity.Assets.Scenes.walker.BodyPart;
 using JointDriveController = Unity.Assets.Scenes.walker.MyJointDriveController;
-using Random = UnityEngine.Random;
+using System.Collections.Generic;
 
 public class Walker : Agent
 {
@@ -39,10 +39,12 @@ public class Walker : Agent
     public Transform rightUpperArm;
     public Transform leftLowerArm;
     public Transform rightLowerArm;
-
     JointDriveController m_JdController;
     OrientationCubeController m_OrientationCube;
     EnvironmentParameters m_ResetParams;
+    List<Vector3> initialPos = new List<Vector3>();
+
+    public static event Action onEpisodeBegin;
 
     public override void Initialize()
     {
@@ -64,8 +66,17 @@ public class Walker : Agent
         m_JdController.SetupBodyPart(leftLowerArm,true);
         m_JdController.SetupBodyPart(rightUpperArm,true);
         m_JdController.SetupBodyPart(rightLowerArm,true);
-
+        
+        foreach (var bodyPart in m_JdController.bodyPartsDict.Values)
+        {
+            initialPos.Add(bodyPart.rb.transform.position - m_OrientationCube.transform.position);
+        }
+        
         m_ResetParams = Academy.Instance.EnvironmentParameters;
+    }
+
+    void Start(){
+        onEpisodeBegin?.Invoke();
     }
 
     public override void OnEpisodeBegin()
@@ -75,6 +86,8 @@ public class Walker : Agent
         {
             bodyPart.Reset(bodyPart);
         }
+
+        onEpisodeBegin?.Invoke();
 
         //Random start rotation to help generalize
         // hips.rotation = Quaternion.Euler(0, Random.Range(0.0f, 360.0f), 0);
@@ -120,12 +133,12 @@ public class Walker : Agent
         var avgVel = GetAvgVelocity();
 
         //current ragdoll velocity. normalized
-        sensor.AddObservation(Vector3.Distance(velGoal, avgVel));
+        // sensor.AddObservation(Vector3.Distance(velGoal, avgVel));
         //avg body vel relative to cube
         sensor.AddObservation(m_OrientationCube.transform.InverseTransformDirection(avgVel));
         // sensor.AddObservation(avgVel);
         //vel goal relative to cube
-        sensor.AddObservation(m_OrientationCube.transform.InverseTransformDirection(velGoal));
+        // sensor.AddObservation(m_OrientationCube.transform.InverseTransformDirection(velGoal));
         // sensor.AddObservation(velGoal);
 
         //rotation deltas
@@ -152,23 +165,23 @@ public class Walker : Agent
         // bpDict[chest].SetJointTargetRotation(continuousActions[++i], continuousActions[++i], continuousActions[++i]);
         bpDict[spine].SetJointTargetRotation(continuousActions[++i], continuousActions[++i], continuousActions[++i]);
 
-        bpDict[leftUpperLeg].SetJointTargetRotation(continuousActions[++i], continuousActions[++i], 0);
-        bpDict[rightUpperLeg].SetJointTargetRotation(continuousActions[++i], continuousActions[++i], 0);
-        bpDict[leftLowerLeg].SetJointTargetRotation(continuousActions[++i], 0, 0);
-        bpDict[rightLowerLeg].SetJointTargetRotation(continuousActions[++i], 0, 0);
-        bpDict[leftFoot].SetJointTargetRotation(continuousActions[++i], continuousActions[++i], continuousActions[++i]);
-        bpDict[leftFoot].SetJointTargetRotation(continuousActions[++i], continuousActions[++i], continuousActions[++i]);
+        bpDict[leftUpperLeg].SetJointTargetRotation(continuousActions[++i], continuousActions[++i], continuousActions[++i]);
+        bpDict[rightUpperLeg].SetJointTargetRotation(continuousActions[++i], continuousActions[++i], continuousActions[++i]);
+        bpDict[leftLowerLeg].SetJointTargetRotation(continuousActions[++i], continuousActions[++i],0);
+        bpDict[rightLowerLeg].SetJointTargetRotation(continuousActions[++i], continuousActions[++i],0);
+        // bpDict[leftFoot].SetJointTargetRotation(continuousActions[++i], continuousActions[++i], continuousActions[++i]);
+        // bpDict[rightFoot].SetJointTargetRotation(continuousActions[++i], continuousActions[++i], continuousActions[++i]);
 
-        bpDict[leftUpperArm].SetJointTargetRotation(continuousActions[++i], continuousActions[++i], 0);
-        bpDict[rightUpperArm].SetJointTargetRotation(continuousActions[++i], continuousActions[++i], 0);
-        bpDict[leftLowerArm].SetJointTargetRotation(continuousActions[++i], 0, 0);
-        bpDict[rightLowerArm].SetJointTargetRotation(continuousActions[++i], 0, 0);
-        bpDict[head].SetJointTargetRotation(continuousActions[++i], continuousActions[++i], 0);
+        bpDict[leftUpperArm].SetJointTargetRotation(continuousActions[++i], continuousActions[++i], continuousActions[++i]);
+        bpDict[rightUpperArm].SetJointTargetRotation(continuousActions[++i], continuousActions[++i], continuousActions[++i]);
+        bpDict[leftLowerArm].SetJointTargetRotation(continuousActions[++i], continuousActions[++i], 0);
+        bpDict[rightLowerArm].SetJointTargetRotation(continuousActions[++i], continuousActions[++i], 0);
+        // bpDict[head].SetJointTargetRotation(continuousActions[++i], continuousActions[++i], 0);
 
         //update joint strength settings
         // bpDict[chest].SetJointStrength(continuousActions[++i]);
         bpDict[spine].SetJointStrength(continuousActions[++i]);
-        bpDict[head].SetJointStrength(continuousActions[++i]);
+        // bpDict[head].SetJointStrength(continuousActions[++i]);
         bpDict[leftUpperLeg].SetJointStrength(continuousActions[++i]);
         bpDict[leftLowerLeg].SetJointStrength(continuousActions[++i]);
         bpDict[leftFoot].SetJointStrength(continuousActions[++i]);
@@ -207,14 +220,72 @@ public class Walker : Agent
         // }
     }
 
+    void getReward(){
+        float postureReward = 0f;
+        float maxDistanceReward = -1f;  // Maximum distance penalty
+        float maxAngleReward = -1f;     // Maximum orientation penalty
+        // List<BodyPart> teacherBodyPartsList = m_TeacherJdController.bodyPartsList;
+        // Debug.Log(teacherBodyPartsList.Count,m_JdController.rb.transform);
+        // for (int i = 0; i < m_JdController.bodyPartsList.Count; i++)
+        // {   
+        //     Debug.Log(m_JdController.bodyPartsList[i].rb.transform.position+" and "+teacherBodyPartsList[i].rb.transform.position);
+        // }
+        // foreach (var bodyPart in m_JdController.bodyPartsDict.Values)
+        // {
+        //     Transform agentPart = bodyPart.rb.transform;
+        //     Transform teacherPart = GetCorrespondingTeacherBodyPart(agentPart);
+
+        //     // Position alignment: Minimize distance between agent and teacher body parts
+        //     float distance = Vector3.Distance(agentPart.position, teacherPart.position);
+        //     float distanceReward = Mathf.Exp(-distance);  // Higher reward for smaller distances
+
+        //     // Orientation alignment: Minimize angular difference between agent and teacher orientations
+        //     Quaternion agentRotation = agentPart.rotation;
+        //     Quaternion teacherRotation = teacherPart.rotation;
+        //     float angle = Quaternion.Angle(agentRotation, teacherRotation);
+        //     float angleReward = Mathf.Exp(-angle * Mathf.Deg2Rad);  // Higher reward for smaller angles
+
+        //     // Combine both rewards
+        //     postureReward += (distanceReward + angleReward) * 0.5f;
+
+        //     // Penalty for large deviations
+        //     maxDistanceReward = Mathf.Max(maxDistanceReward, -distance);
+        //     maxAngleReward = Mathf.Max(maxAngleReward, -angle);
+        // }
+
+        // // Normalize the reward
+        // postureReward /= m_JdController.bodyPartsDict.Values.Count;
+
+        // // Add posture reward, and penalize large deviations
+        // AddReward(postureReward + maxDistanceReward + maxAngleReward);
+    }
+
+    // private void Start(){
+    //     m_TeacherJdController = teacher.GetComponent<JointDriveController>();
+    // }
+
     void FixedUpdate()
     {
         UpdateOrientationObjects();
-        Transform _hips=hips;
-        Debug.Log(hips.position.y+" "+head.position.y);
-        var hipReward = hips.position.y+0.5f;
-        var headReward = head.position.y+0.4f;
-        AddReward(hipReward+headReward);
+        var rewardComponent = GetComponent<ImitationReward>();
+        if(rewardComponent!=null){
+            float reward = rewardComponent.CalculateReward();
+            // Debug.Log(reward);
+            AddReward(reward);
+        }
+        // getReward();
+        // float error=0;
+        // foreach (var bodyPart in m_JdController.bodyPartsDict.Values)
+        // {
+        //     Vector3 temp=bodyPart.rb.transform.position - m_OrientationCube.transform.position;
+        //     error+=temp.sqrMagnitude;
+        // }
+        // error*=(-0.1f);
+        // AddReward(error);
+        // Debug.Log(hips.position.y+" "+head.position.y);
+        // var hipReward = hips.position.y+0.5f;
+        // var headReward = head.position.y+0.4f;
+        // AddReward(hipReward+headReward);
         // if(_hips.position.y>.7f){
         //     AddReward(0.01f);
         // }
