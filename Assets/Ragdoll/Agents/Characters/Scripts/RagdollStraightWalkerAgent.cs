@@ -194,7 +194,9 @@ public class RagdollStraightWalkerAgent : Agent, IOnTerrainCollision
 
     void Update()
     {
-        
+        if(Input.GetKeyDown(KeyCode.Escape)){
+            SceneLoader.Load(SceneLoader.Scene.MainMenuScene);
+        }
     }
 
 	private void FixedUpdate() {

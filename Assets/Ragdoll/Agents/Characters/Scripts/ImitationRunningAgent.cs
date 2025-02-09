@@ -42,6 +42,9 @@ public class ImitationRunningAgent : Agent, IOnSensorCollision, IOnTerrainCollis
 
 	// Update is called once per frame
 	void Update () {
+		if(Input.GetKeyDown(KeyCode.Escape)){
+            SceneLoader.Load(SceneLoader.Scene.MainMenuScene);
+        }
 	}
 
     public override void OnEpisodeBegin(){

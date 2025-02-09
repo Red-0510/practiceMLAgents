@@ -219,6 +219,9 @@ public class RagdollTerrainWalkerAgent : Agent, IOnTerrainCollision
 
     void Update()
     {
+		if(Input.GetKeyDown(KeyCode.Escape)){
+            SceneLoader.Load(SceneLoader.Scene.MainMenuScene);
+        }
         
     }
 

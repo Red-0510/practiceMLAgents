@@ -8,4 +8,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Imitation/RagdollRunningAgent.unity
     guid: 094b8ebda8d938647b5a9ac44a3b7873
+  - enabled: 1
+    path: Assets/Scenes/Combined/MainMenuScene.unity
+    guid: 93b166051b2a8374f8a9d0d4d649d34f
+  - enabled: 1
+    path: Assets/Scenes/StraightWalker/StraightWalker.unity
+    guid: 234ff34343b86df41bd4ea6644d777a2
+  - enabled: 1
+    path: Assets/Scenes/TerrainWalker/TerrainWalker.unity
+    guid: 71381dc1cf9fb4a41a48d063f00bd003
   m_configObjects: {}
